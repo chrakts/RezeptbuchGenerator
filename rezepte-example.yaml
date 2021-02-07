@@ -1,0 +1,3 @@
+rezepte:
+  inputDir: '/home/chrak/Daten/Rezepte'
+  outputFile: '/home/chrak/Daten/Rezepte/Abels Rezepte.pdf'
