@@ -3,7 +3,7 @@ import json
 import inspect,os
 import pprint
 import yaml
-
+import easywebdav2
 
 
 class PDF(FPDF):
@@ -115,4 +115,24 @@ for root, dirs, files in os.walk(dataMap['rezepte']['inputDir']):
           #print(type(data["recipeInstructions"]))
 
 pdf.output(dataMap['rezepte']['outputFile'], 'F')
+
+# https://pypi.org/project/webdavclient3/
+
+webdav = easywebdav2.connect(
+    host=dataMap['rezepte']['upload']['host'],
+    username=dataMap['rezepte']['upload']['user'],
+    port=443,
+    protocol="https",
+    password=dataMap['rezepte']['upload']['password'])
+
+_file = "test.py"
+#print (webdav.cd("/files"))
+webdav.mkdir('some_dir')
+# print webdav._get_url("")
+print (webdav.ls())
+# print webdav.exists("/dav/test.py")
+# print webdav.exists("ECS.zip")
+# print webdav.download(_file, "./"+_file)
+print (webdav.upload(dataMap['rezepte']['outputFile'],"Rezepte.pdf", ))
+
 
